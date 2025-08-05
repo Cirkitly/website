@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cirkitly - The future of hardware design</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+            background: #000000;
+            color: #f5f5f7;
+            line-height: 1.47059;
+            font-weight: 400;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 44px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            z-index: 9999;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-content {
+            max-width: 1024px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0 22px;
+        }
+
+        .nav-logo {
+            font-size: 21px;
+            font-weight: 600;
+            color: #f5f5f7;
+            text-decoration: none;
+            letter-spacing: -0.022em;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: #f5f5f7;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 400;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.3), transparent),
+                        radial-gradient(ellipse 80% 80% at 80% 100%, rgba(255, 255, 255, 0.05), transparent);
+        }
+
+        .hero-pretitle {
+            font-size: 17px;
+            line-height: 1.29412;
+            font-weight: 600;
+            letter-spacing: -0.022em;
+            color: #06c;
+            margin-bottom: 8px;
+        }
+
+        .hero-title {
+            font-size: clamp(48px, 8vw, 96px);
+            line-height: 1.05;
+            font-weight: 700;
+            letter-spacing: -0.015em;
+            color: #f5f5f7;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #f5f5f7 0%, rgba(245, 245, 247, 0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 28px;
+            line-height: 1.14286;
+            font-weight: 600;
+            letter-spacing: 0.007em;
+            color: #f5f5f7;
+            margin-bottom: 19px;
+            max-width: 800px;
+        }
+
+        .hero-description {
+            font-size: 21px;
+            line-height: 1.38095;
+            font-weight: 400;
+            letter-spacing: 0.011em;
+            color: #a1a1a6;
+            max-width: 980px;
+            margin-bottom: 40px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: #06c;
+            color: #fff;
+            border: none;
+            border-radius: 980px;
+            padding: 12px 24px;
+            font-size: 17px;
+            line-height: 1.23536;
+            font-weight: 400;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: #0051d5;
+            transform: scale(1.02);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #06c;
+            border: 1px solid #06c;
+            border-radius: 980px;
+            padding: 11px 23px;
+            font-size: 17px;
+            line-height: 1.23536;
+            font-weight: 400;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 102, 204, 0.1);
+            transform: scale(1.02);
+        }
+
+        /* Product Showcase */
+        .showcase {
+            padding: 100px 0 140px;
+            background: #000;
+        }
+
+        .showcase-container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 22px;
+        }
+
+        .showcase-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .showcase-pretitle {
+            font-size: 21px;
+            line-height: 1.19048;
+            font-weight: 600;
+            letter-spacing: 0.011em;
+            color: #06c;
+            margin-bottom: 8px;
+        }
+
+        .showcase-title {
+            font-size: 48px;
+            line-height: 1.08349;
+            font-weight: 700;
+            letter-spacing: -0.003em;
+            color: #f5f5f7;
+            margin-bottom: 20px;
+        }
+
+        .showcase-description {
+            font-size: 21px;
+            line-height: 1.38095;
+            font-weight: 400;
+            letter-spacing: 0.011em;
+            color: #a1a1a6;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 18px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            border-radius: 18px;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 102, 204, 0.2);
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .status-available {
+            background: rgba(48, 209, 88, 0.15);
+            color: #30d158;
+            border: 1px solid rgba(48, 209, 88, 0.3);
+        }
+
+        .status-coming {
+            background: rgba(255, 159, 10, 0.15);
+            color: #ff9f0a;
+            border: 1px solid rgba(255, 159, 10, 0.3);
+        }
+
+        .status-development {
+            background: rgba(100, 210, 255, 0.15);
+            color: #64d2ff;
+            border: 1px solid rgba(100, 210, 255, 0.3);
+        }
+
+        .product-name {
+            font-size: 28px;
+            line-height: 1.14286;
+            font-weight: 700;
+            letter-spacing: 0.007em;
+            color: #f5f5f7;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+        }
+
+        .product-description {
+            font-size: 17px;
+            line-height: 1.47059;
+            font-weight: 400;
+            letter-spacing: -0.022em;
+            color: #a1a1a6;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 140px 0 100px;
+            background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);
+        }
+
+        .features-container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 22px;
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .features-title {
+            font-size: 48px;
+            line-height: 1.08349;
+            font-weight: 700;
+            letter-spacing: -0.003em;
+            color: #f5f5f7;
+            margin-bottom: 20px;
+        }
+
+        .features-subtitle {
+            font-size: 21px;
+            line-height: 1.38095;
+            font-weight: 400;
+            letter-spacing: 0.011em;
+            color: #a1a1a6;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 60px;
+        }
+
+        .feature-item {
+            text-align: center;
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 20px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #06c, #0051d5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .feature-title {
+            font-size: 21px;
+            line-height: 1.19048;
+            font-weight: 600;
+            letter-spacing: 0.011em;
+            color: #f5f5f7;
+            margin-bottom: 12px;
+        }
+
+        .feature-description {
+            font-size: 17px;
+            line-height: 1.47059;
+            font-weight: 400;
+            letter-spacing: -0.022em;
+            color: #a1a1a6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 140px 0;
+            background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(0, 102, 204, 0.08) 0%, transparent 100%);
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 22px;
+        }
+
+        .cta-title {
+            font-size: 48px;
+            line-height: 1.08349;
+            font-weight: 700;
+            letter-spacing: -0.003em;
+            color: #f5f5f7;
+            margin-bottom: 20px;
+        }
+
+        .cta-description {
+            font-size: 21px;
+            line-height: 1.38095;
+            font-weight: 400;
+            letter-spacing: 0.011em;
+            color: #a1a1a6;
+            margin-bottom: 40px;
+        }
+
+        .signup-form {
+            display: flex;
+            gap: 12px;
+            max-width: 400px;
+            margin: 0 auto 20px;
+            flex-wrap: wrap;
+        }
+
+        .email-input {
+            flex: 1;
+            min-width: 250px;
+            height: 44px;
+            padding: 0 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #f5f5f7;
+            font-size: 17px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .email-input:focus {
+            border-color: #06c;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .email-input::placeholder {
+            color: #86868b;
+        }
+
+        .signup-btn {
+            height: 44px;
+            padding: 0 24px;
+            background: #06c;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 100px;
+        }
+
+        .signup-btn:hover {
+            background: #0051d5;
+            transform: scale(1.02);
+        }
+
+        .signup-btn:disabled {
+            background: #424245;
+            color: #86868b;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .signup-message {
+            margin-top: 16px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 15px;
+            display: none;
+        }
+
+        .signup-message.success {
+            background: rgba(48, 209, 88, 0.1);
+            color: #30d158;
+            border: 1px solid rgba(48, 209, 88, 0.2);
+        }
+
+        .signup-message.error {
+            background: rgba(255, 69, 58, 0.1);
+            color: #ff453a;
+            border: 1px solid rgba(255, 69, 58, 0.2);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 100px 0 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 22px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-section h3 {
+            font-size: 17px;
+            line-height: 1.23536;
+            font-weight: 600;
+            letter-spacing: -0.022em;
+            color: #f5f5f7;
+            margin-bottom: 16px;
+        }
+
+        .footer-section a {
+            color: #86868b;
+            text-decoration: none;
+            font-size: 15px;
+            line-height: 1.33337;
+            font-weight: 400;
+            letter-spacing: -0.016em;
+            display: block;
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #f5f5f7;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: #86868b;
+            font-size: 12px;
+            line-height: 1.33337;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 48px;
+            }
+
+            .hero-subtitle {
+                font-size: 21px;
+            }
+
+            .hero-description {
+                font-size: 17px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .showcase-title,
+            .features-title,
+            .cta-title {
+                font-size: 32px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .signup-form {
+                flex-direction: column;
+                max-width: 100%;
+            }
+
+            .email-input {
+                min-width: 100%;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        /* Smooth animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #424245;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #86868b;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="#" class="nav-logo">Cirkitly</a>
+            <ul class="nav-links">
+                <li><a href="#products">Products</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#updates">Updates</a></li>
+                <li><a href="https://github.com/Cirkitly" target="_blank">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-pretitle">Introducing</div>
+        <h1 class="hero-title">Cirkitly</h1>
+        <h2 class="hero-subtitle">The future of hardware design.</h2>
+        <p class="hero-description">
+            From spec to silicon in seconds. A modular open-source stack of intelligent agents and tools that reimagines the way digital hardware is designed, using AI to radically simplify chip and accelerator development.
+        </p>
+        <div class="hero-cta">
+            <a href="#updates" class="btn-primary">Get Early Access</a>
+            <a href="https://github.com/Cirkitly/spec2rtl" class="btn-secondary">Try spec2rtl</a>
+        </div>
+    </section>
+
+    <!-- Product Showcase -->
+    <section id="products" class="showcase">
+        <div class="showcase-container">
+            <div class="showcase-header fade-in">
+                <div class="showcase-pretitle">Our Tools</div>
+                <h2 class="showcase-title">Powerful. Intelligent. Revolutionary.</h2>
+                <p class="showcase-description">
+                    Each tool in the Cirkitly stack is designed to work seamlessly together or independently, giving you the flexibility to build your perfect hardware workflow.
+                </p>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card fade-in">
+                    <div class="product-status status-available">
+                        <span>●</span> Available Now
+                    </div>
+                    <h3 class="product-name">spec2rtl</h3>
+                    <p class="product-description">
+                        Transform natural language specifications into verified, synthesizable RTL with autonomous validation and testing. Your AI copilot for hardware design.
+                    </p>
+                </div>
+
+                <div class="product-card fade-in">
+                    <div class="product-status status-coming">
+                        <span>●</span> Coming Soon
+                    </div>
+                    <h3 class="product-name">picoplace</h3>
+                    <p class="product-description">
+                        CLI-driven PCB layout synthesis with AI-powered placement optimization and real-time visualization. From netlist to layout in seconds.
+                    </p>
+                </div>
+
+                <div class="product-card fade-in">
+                    <div class="product-status status-development">
+                        <span>●</span> In Development
+                    </div>
+                    <h3 class="product-name">rtl-copilot</h3>
+                    <p class="product-description">
+                        Prompt-based Verilog generation with intelligent FSM editing, real-time debugging, and natural language optimization suggestions.
+                    </p>
+                </div>
+
+                <div class="product-card fade-in">
+                    <div class="product-status status-development">
+                        <span>●</span> In Development
+                    </div>
+                    <h3 class="product-name">cuda-genie</h3>
+                    <p class="product-description">
+                        AI compiler that transforms C/Python algorithms into optimized CUDA kernels and HLS designs with automatic performance tuning.
+                    </p>
+                </div>
+
+                <div class="product-card fade-in">
+                    <div class="product-status status-development">
+                        <span>●</span> Planned
+                    </div>
+                    <h3 class="product-name">silicon-agent</h3>
+                    <p class="product-description">
+                        Complete workflow orchestration from specification to layout. The ultimate end-to-end automation for silicon development.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="features-container">
+            <div class="features-header fade-in">
+                <h2 class="features-title">Why choose Cirkitly?</h2>
+                <p class="features-subtitle">
+                    Hardware development reimagined with intelligence, speed, and unprecedented simplicity.
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Lightning Fast</h3>
+                    <p class="feature-description">
+                        Go from concept to working hardware in minutes, not months. AI acceleration eliminates the tedious bottlenecks.
+                    </p>
+                </div>
+
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">🧠</div>
+                    <h3 class="feature-title">Intelligent</h3>
+                    <p class="feature-description">
+                        Natural language interfaces combined with deep hardware knowledge make complex designs accessible to everyone.
+                    </p>
+                </div>
+
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">🔗</div>
+                    <h3 class="feature-title">Seamless</h3>
+                    <p class="feature-description">
+                        Modular tools that integrate perfectly together or work independently, fitting into any existing workflow.
+                    </p>
+                </div>
+
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Precise</h3>
+                    <p class="feature-description">
+                        AI-powered validation and automated testing ensure your designs work correctly the first time, every time.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="updates" class="cta-section">
+        <div class="cta-container">
+            <h2 class="cta-title fade-in">Be among the first.</h2>
+            <p class="cta-description fade-in">
+                Get early access to new tools, beta features, and exclusive updates from the Cirkitly team.
+            </p>
+
+            <form class="signup-form fade-in" id="signupForm">
+                <input 
+                    type="email" 
+                    class="email-input" 
+                    placeholder="Enter your email"
+                    id="emailInput"
+                    required
+                >
+                <button type="submit" class="signup-btn" id="signupBtn">
+                    Notify Me
+                </button>
+            </form>
+
+            <div class="signup-message" id="signupMessage"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Products</h3>
+                    <a href="https://github.com/Cirkitly/spec2rtl">spec2rtl</a>
+                    <a href="https://github.com/Cirkitly/picoplace">picoplace</a>
+                    <a href="#">rtl-copilot</a>
+                    <a href="#">cuda-genie</a>
+                    <a href="#">silicon-agent</a>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <a href="https://github.com/Cirkitly">GitHub</a>
+                    <a href="#">Documentation</a>
+                    <a href="#">Examples</a>
+                    <a href="#">Community</a>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <a href="https://www.youtube.com/@EchoesWith-in">YouTube</a>
+                    <a href="#">Discord</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Blog</a>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <a href="#">About</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Privacy</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>Copyright © 2025 Cirkitly. All rights reserved.</p>
+                <p>Maintained by <a href="https://github.com/pro-utkarshM" style="color: #06c;">Utkarsh Maurya</a> and the open-source community.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Email signup functionality
+        const signupForm = document.getElementById('signupForm');
+        const emailInput = document.getElementById('emailInput');
+        const signupBtn = document.getElementById('signupBtn');
+        const signupMessage = document.getElementById('signupMessage');
+
+        let registeredEmails = [];
+
+        signupForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = emailInput.value.trim();
+            
+            if (!email || !isValidEmail(email)) {
+                showMessage('Please enter a valid email address.', 'error');
+                return;
+            }
+
+            if (registeredEmails.includes(email)) {
+                showMessage('You\'re already signed up for updates!', 'error');
+                return;
+            }
+
+            signupBtn.disabled = true;
+            signupBtn.textContent = 'Signing up...';
+
+            // Simulate API call with Apple-like timing
+            setTimeout(() => {
+                registeredEmails.push(email);
+                showMessage('✓ You\'re all set! We\'ll notify you when new tools launch.', 'success');
+                emailInput.value = '';
+                
+                signupBtn.disabled = false;
+                signupBtn.textContent = 'Notify Me';
+            }, 1200);
+        });
+
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function showMessage(message, type) {
+            signupMessage.textContent = message;
+            signupMessage.className = `signup-message ${type}`;
+            signupMessage.style.display = 'block';
+            
+            setTimeout(() => {
+                signupMessage.style.display = 'none';
+            }, 5000);
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navHeight = 44;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Nav background on scroll
+        let lastScrollY = window.scrollY;
+        
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav');
+            const currentScrollY = window.scrollY;
+            
+            if (currentScrollY > 50) {
+                nav.style.background = 'rgba(0, 0, 0, 0.9)';
+            } else {
+                nav.style.background = 'rgba(0, 0, 0, 0.8)';
+            }
+            
+            lastScrollY = currentScrollY;
+        });
+
+        // Product card hover effects
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 20px 40px rgba(0, 102, 204, 0.15)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        // Preload critical elements
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+        });
+
+        // Apple-style focus management
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                document.body.classList.add('keyboard-navigation');
+            }
+        });
+
+        document.addEventListener('mousedown', () => {
+            document.body.classList.remove('keyboard-navigation');
+        });
+    </script>
+
+    <style>
+        /* Add focus styles for keyboard navigation */
+        body.keyboard-navigation .btn-primary:focus,
+        body.keyboard-navigation .btn-secondary:focus,
+        body.keyboard-navigation .signup-btn:focus {
+            outline: 2px solid #06c;
+            outline-offset: 2px;
+        }
+
+        body.keyboard-navigation .email-input:focus {
+            outline: 2px solid #06c;
+            outline-offset: 2px;
+        }
+
+        /* Initial load animation */
+        body {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Enhanced hover states */
+        .nav-links a {
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background: #06c;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Product status indicator animations */
+        .status-available::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background: #30d158;
+            border-radius: 50%;
+            animation: pulse-green 2s infinite;
+        }
+
+        .status-coming::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background: #ff9f0a;
+            border-radius: 50%;
+            animation: pulse-orange 2s infinite;
+        }
+
+        .status-development::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background: #64d2ff;
+            border-radius: 50%;
+            animation: pulse-blue 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+            50% { opacity: 0.7; transform: translateY(-50%) scale(1.2); }
+        }
+
+        @keyframes pulse-orange {
+            0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+            50% { opacity: 0.7; transform: translateY(-50%) scale(1.2); }
+        }
+
+        @keyframes pulse-blue {
+            0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+            50% { opacity: 0.7; transform: translateY(-50%) scale(1.2); }
+        }
+
+        /* Enhanced button animations */
+        .btn-primary, .btn-secondary, .signup-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before, .btn-secondary::before, .signup-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .btn-primary:hover::before, .btn-secondary:hover::before, .signup-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Loading states */
+        .signup-btn:disabled {
+            position: relative;
+        }
+
+        .signup-btn:disabled::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 16px;
+            height: 16px;
+            margin: -8px 0 0 -8px;
+            border: 2px solid transparent;
+            border-top: 2px solid #86868b;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Mobile enhancements */
+        @media (max-width: 768px) {
+            .nav-content {
+                padding: 0 16px;
+            }
+
+            .hero {
+                padding: 80px 16px 0;
+                min-height: calc(100vh - 44px);
+            }
+
+            .showcase-container,
+            .features-container,
+            .cta-container,
+            .footer-container {
+                padding: 0 16px;
+            }
+
+            .product-card {
+                padding: 30px 20px;
+            }
+
+            .hero-cta {
+                gap: 12px;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+
+        /* Reduced motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            html {
+                scroll-behavior: auto;
+            }
+        }
+    </style>
+</body>
+</html>
